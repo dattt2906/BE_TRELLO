@@ -17,7 +17,7 @@ import { UserInfor } from './users/userInfor.entity';
     host: 'localhost',
     port: 3306,
     username: 'root',
-    password: '123456',
+    password: '01214155429a',
     database: 'nestjs',
     entities: [User, ColumnEntity, RowEntity,UserInfor],
     synchronize: true,

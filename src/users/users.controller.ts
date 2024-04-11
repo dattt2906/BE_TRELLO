@@ -1,4 +1,4 @@
-import { Controller, Delete, Get, Param, Post, UseGuards } from '@nestjs/common';
+import { Controller, Delete, Get, Param, Post, Put, UseGuards } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { User } from './user.entity';
 import { Body } from '@nestjs/common';
@@ -50,9 +50,20 @@ export class UsersController {
   }
 
   @Get('find-userinfor-by-userId/:userId')
-    async findUserInforById(@Param('userId') userId:number):Promise<UserInfor>{
-      return await this.userService.findUserInforById(userId)
+  async findUserInforById(@Param('userId') userId:number):Promise<UserInfor>{
+  return await this.userService.findUserInforById(userId)
     }
+  
+  @Put('update-display_name/:userId')
+  async updateDisplayName(@Param('userId') userId:number, @Body('display_name') display_Name: string):Promise<UserInfor>{
+    return await this.userService.updateDisplayName(userId,display_Name);
+  }
+  @Put('update-age/:userId')
+  async updateAge(@Param('userId') userId:number, @Body('age') age: number):Promise<UserInfor>{
+    return await this.userService.updateAge(userId,age);
+  }
+  
+  
   
 }
   

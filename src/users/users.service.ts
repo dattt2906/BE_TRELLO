@@ -1,4 +1,4 @@
-import { Injectable, UnauthorizedException } from '@nestjs/common';
+import { Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { User } from './user.entity';
@@ -89,6 +89,27 @@ export class UsersService {
         }  
             })
     }
+    async updateDisplayName(userId:number,display_name:string):Promise<UserInfor>{
+
+        const userInfor= await this.findUserInforById(userId);
+        if(!userInfor){
+            throw new NotFoundException("user does not find");
+        }
+        await this.userInforRepository.update(userInfor, { display_name: display_name });
+        return await this.findUserInforById(userId)
+    }
+    async updateAge(userId:number,age:number):Promise<UserInfor>{
+
+        const userInfor= await this.findUserInforById(userId);
+        if(!userInfor){
+            throw new NotFoundException("user does not find");
+        }
+        await this.userInforRepository.update(userInfor, { age: age });
+        return await this.findUserInforById(userId)
+    }
+
+
+    
 
 
     
