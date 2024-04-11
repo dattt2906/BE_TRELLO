@@ -1,9 +1,11 @@
-import { Controller, Get, Param, Post, UseGuards } from '@nestjs/common';
+import { Controller, Delete, Get, Param, Post, UseGuards } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { User } from './user.entity';
 import { Body } from '@nestjs/common';
 import { UsersDto } from './dto/users.dto';
 import { AuthGuard } from 'src/auth/decorate/auth.guard';
+import { UserInfor } from './userInfor.entity';
+import { UsersInfotDto } from './dto/userInfor.dto';
 
 @Controller('users')
 export class UsersController {
@@ -37,7 +39,22 @@ export class UsersController {
 
 
   }
+  @Get('find-all-userinfor')
+  async findUserInfor():Promise<UserInfor[]>{
+
+    return await this.userService.findAllUserInfor();
+  }
+  @Post('create-userinfor')
+  async createUserInfor(@Body() userInfor:UsersInfotDto):Promise<UserInfor>{
+    return await this.userService.createUserInfor(userInfor);
+  }
+
+  @Get('find-userinfor-by-userId/:userId')
+    async findUserInforById(@Param('userId') userId:number):Promise<UserInfor>{
+      return await this.userService.findUserInforById(userId)
+    }
   
 }
+  
 
 

@@ -8,10 +8,11 @@ import { User } from 'src/users/user.entity';
 import { UsersService } from 'src/users/users.service';
 import { APP_GUARD } from '@nestjs/core';
 import { AuthGuard } from 'src/auth/decorate/auth.guard';
+import { UserInfor } from 'src/users/userInfor.entity';
 
 
 @Module({
-  imports: [TypeOrmModule.forFeature([ColumnEntity, RowEntity, User])],
+  imports: [TypeOrmModule.forFeature([ColumnEntity, RowEntity, User,UserInfor])],
   controllers: [TableController],
   providers: [TableService, UsersService,
     // {

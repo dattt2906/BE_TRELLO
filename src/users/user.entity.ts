@@ -1,5 +1,6 @@
 import { ColumnEntity } from "src/table/column.entity";
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany, OneToOne } from "typeorm";
+import { UserInfor } from "./userInfor.entity";
 @Entity()
 export class User {
     @PrimaryGeneratedColumn()
@@ -12,7 +13,10 @@ export class User {
     display_name: string;
 
     @OneToMany(() => ColumnEntity, (col) => col.users)
-
     cols: ColumnEntity[];
+
+    @OneToOne(()=>UserInfor, (uInfor)=>uInfor.users)
+
+    userInfors:UserInfor
 
 }
