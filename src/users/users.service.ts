@@ -33,7 +33,9 @@ export class UsersService {
         });
     }
     async createUser(user: UsersDto): Promise<User> {
-        return this.usersRepository.save(user);
+        
+        const { username, password} = user
+        return this.usersRepository.save({username,password});
     }
     async findUserById(userId: number): Promise<User> {
         return await this.usersRepository.findOne({
@@ -106,6 +108,25 @@ export class UsersService {
         }
         await this.userInforRepository.update(userInfor, { age: age });
         return await this.findUserInforById(userId)
+    }
+
+    async updateSex(userId:number, sex:string):Promise<UserInfor>{
+        const userInfor= await this.findUserInforById(userId);
+        if(!userInfor){
+            throw new NotFoundException("user does not find");
+        }
+        await this.userInforRepository.update(userInfor, { sex: sex });
+        return await this.findUserInforById(userId)
+
+    }
+    async updateAddress(userId:number, address:string):Promise<UserInfor>{
+        const userInfor= await this.findUserInforById(userId);
+        if(!userInfor){
+            throw new NotFoundException("user does not find");
+        }
+        await this.userInforRepository.update(userInfor, { address: address });
+        return await this.findUserInforById(userId)
+
     }
 
 

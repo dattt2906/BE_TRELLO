@@ -9,19 +9,21 @@ import { ColumnEntity } from './table/column.entity';
 import { RowEntity } from './table/row.entity';
 import { AuthModule } from './auth/auth.module';
 import { UserInfor } from './users/userInfor.entity';
+import { MailerModule } from './mailer/mailer.module';
+import { ConfigModule } from '@nestjs/config';
 
 
 @Module({
-  imports: [TypeOrmModule.forRoot({
+  imports: [ConfigModule.forRoot(),TypeOrmModule.forRoot({
     type: 'mysql',
     host: 'localhost',
     port: 3306,
     username: 'root',
-    password: '01214155429a',
+    password: '123456',
     database: 'nestjs',
     entities: [User, ColumnEntity, RowEntity,UserInfor],
     synchronize: true,
-  }), UsersModule, TableModule, AuthModule],
+  }), UsersModule, TableModule, AuthModule, MailerModule],
   controllers: [AppController],
   providers: [AppService],
 })

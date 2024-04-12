@@ -1,4 +1,4 @@
-import { Controller, Delete, Get, Param, Post, Put, UseGuards } from '@nestjs/common';
+import { BadGatewayException, BadRequestException, Controller, Delete, Get, Param, Post, Put, UseGuards, ValidationPipe } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { User } from './user.entity';
 import { Body } from '@nestjs/common';
@@ -24,7 +24,7 @@ export class UsersController {
   }
 
   @Post('create-user')
-  async createUser(@Body() user: UsersDto): Promise<User> {
+  async createUser(@Body(ValidationPipe) user: UsersDto): Promise<User> {
     return await this.userService.createUser(user);
   }
 
@@ -62,7 +62,17 @@ export class UsersController {
   async updateAge(@Param('userId') userId:number, @Body('age') age: number):Promise<UserInfor>{
     return await this.userService.updateAge(userId,age);
   }
+  @Put('update-sex/:userId')
+  async updateSex(@Param("userId") userId:number,@Body('sex') sex:string):Promise<UserInfor>{
+
+    return await this.userService.updateSex(userId, sex);
+  }
+  @Put('update-address/:userId')
   
+  async updateAddress(@Param("userId") userId:number,@Body('sex') address:string):Promise<UserInfor>{
+
+    return await this.userService.updateAddress(userId, address);
+  }
   
   
 }
