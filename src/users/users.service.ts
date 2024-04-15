@@ -129,6 +129,19 @@ export class UsersService {
 
     }
 
+    async updateUserActive(userId:number):Promise<User>{
+        const user= await this.findUserById(userId);
+        if(!user){
+            throw new NotFoundException("user does not find");
+        }
+        // await this.usersRepository.update(userId, { isActive: true });
+
+    user.isActive = true; // Cập nhật trạng thái isActive trong đối tượng user
+
+    return await this.usersRepository.save(user)
+
+    }
+
 
     
 

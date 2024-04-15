@@ -11,6 +11,8 @@ export class User {
     password: string;
     @Column({nullable:true})
     display_name: string;
+    @Column({default:false})
+    isActive:boolean;
 
     @OneToMany(() => ColumnEntity, (col) => col.users)
     cols: ColumnEntity[];

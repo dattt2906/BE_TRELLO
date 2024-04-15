@@ -9,16 +9,19 @@ import { User } from 'src/users/user.entity';
 import { JwtModule } from '@nestjs/jwt';
 import { jwtConstants } from 'src/constants/jwt.constant';
 import { UserInfor } from 'src/users/userInfor.entity';
+import { MailerService } from 'src/mailer/mailer.service';
+import { MailerModule } from 'src/mailer/mailer.module';
+import { ConfigModule } from '@nestjs/config';
 
 
 @Module({
-  imports:[TypeOrmModule.forFeature([User,UserInfor]),
+  imports:[TypeOrmModule.forFeature([User,UserInfor,]),
   JwtModule.register({
     global: true,
     secret: jwtConstants.secret,
     signOptions: { expiresIn: jwtConstants.expiresIn},
-  }),UsersModule],
+  }),UsersModule,MailerModule,ConfigModule ],
   controllers: [AuthController],
-  providers: [AuthService,UsersService]
+  providers: [AuthService,UsersService,MailerService]
 })
 export class AuthModule {}

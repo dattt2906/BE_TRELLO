@@ -23,9 +23,9 @@ export class UsersController {
     return await this.userService.findUserById(userId);
   }
 
-  @Post('create-user')
-  async createUser(@Body(ValidationPipe) user: UsersDto): Promise<User> {
-    return await this.userService.createUser(user);
+  @Put('update-user/:userId')
+  async updateUserActive(@Param('userId') userId:number):Promise<User>{
+    return await this.userService.updateUserActive(userId)
   }
 
   @Get('find-user-by-name/:username')
