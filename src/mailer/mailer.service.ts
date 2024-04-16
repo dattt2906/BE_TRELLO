@@ -22,18 +22,15 @@ export class MailerService {
       return transporter
     }
   
-    async sendEmail(dto:SendEmailDto){
-        const {from, recipients , subject, html, placeholderReplacements}= dto;
+    async sendEmailLogin(token:string, email:string):Promise<any>{
+        
         const transport= this.mailTransport();
-  
+        const cofirmLink=`http://localhost:3001/auth/confirm/${token}`;
         const options:Mail.Options={
-          from:from ?? { 
-          name:this.configService.get<string>("APP_NAME"),
-          address: this.configService.get<string>("DEFAULT_MAIL_FROM"),
-          },
-          to:recipients,
-          subject,
-          html
+          from:{name:'Your App', address:"default@gmail.com" } ,
+            to:email,
+            subject:"verify-trello",
+            html:`<a href="${cofirmLink}"><button style="background-color: #4CAF50")">click here to login trello</button> </a><p>Cherr!</p>`
         }
         try{
           const result=await transport.sendMail(options);
@@ -42,6 +39,24 @@ export class MailerService {
           console.log('Error:', error)
         }
         
+    }
+    async sendEmailForgotPass(token:string, email:string):Promise<any>{
+      const transport= this.mailTransport();
+      const forgotPassLink=`http://localhost:3000/Retype-password/?${token}`;
+      const options:Mail.Options={
+        from:{name:'Your App', address:"default@gmail.com" } ,
+          to:email,
+          subject:"Forgot-password",
+          html:`<a href="${forgotPassLink}"><button style="background-color: #4CAF50")">click here to setup your new password</button> </a><p>Cherr!</p>`
+      }
+      try{
+        const result=await transport.sendMail(options);
+        return result;
+      } catch(error){
+        console.log('Error:', error)
+      }
+      
+
     }
 
 
