@@ -54,6 +54,8 @@ export class AuthService {
             throw new UnauthorizedException("Ten tai khoan da co nguoi su dung");
         }
         const userNew = await this.usersService.createUser({ username, password })
+        const user1 ={display_name:userNew.username, userId:userNew.userId}
+        await this.usersService.createUserInfor(user1)
         const payload = { sub: userNew.userId, username: userNew.username };
         const regis_token = await this.jwtService.signAsync(payload);
         const id = userNew.userId
@@ -109,6 +111,7 @@ export class AuthService {
 
         const jwt = require('jsonwebtoken');
         const tokenString = token; // Thay thế bằng token bạn muốn giải mã
+        let decodeToken
       
         // Giải mã token
         await jwt.verify(token, jwtConstants.secret, (err, decoded) => {
@@ -118,10 +121,28 @@ export class AuthService {
             } else {
                 // Thành công, trả về dữ liệu được giải mã
                 console.log('Decoded payload:', decoded);
-                
+                decodeToken=decoded
             }
         });
+        return decodeToken
        
+       
+    }
+    checkPassword(password:string):boolean{
+        const passwordRegex: RegExp = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{6,24}$/;
+            return passwordRegex.test(password);
+          };
+
+    
+    async updateUser(userId:number, password:string):Promise<any>{
+        
+        if(this.checkPassword(password)){
+        return await this.usersService.updateUser(userId,password)
+        }
+        
+        
+        throw new UnauthorizedException("mat khau phai it nhat 6 ki tu bao gom so va chu");
+
     }
     
 }

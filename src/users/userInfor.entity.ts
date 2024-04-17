@@ -7,11 +7,11 @@ export class UserInfor {
     userInforId: number
     @Column()
     display_name: string;
-    @Column()
+    @Column({default:null})
     age:number;
-    @Column()
+    @Column({default:null})
     sex:string
-    @Column()
+    @Column({default:null})
     address:string;
 
     @OneToOne(() => User, (user) => user.userInfors)

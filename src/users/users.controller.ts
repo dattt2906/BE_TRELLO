@@ -22,8 +22,13 @@ export class UsersController {
   async getUserById(@Param("userId") userId: number): Promise<User> {
     return await this.userService.findUserById(userId);
   }
+  // @Put("update-user-password/:userId")
+  // async updateUser(@Param("userId") userId:number, @Body("password") password:string):Promise<any>{
 
-  @Put('update-user/:userId')
+  //   return await this.userService.updateUser(userId, password)
+  // }
+
+  @Put('update-user-active/:userId')
   async updateUserActive(@Param('userId') userId:number):Promise<User>{
     return await this.userService.updateUserActive(userId)
   }
@@ -69,7 +74,7 @@ export class UsersController {
   }
   @Put('update-address/:userId')
   
-  async updateAddress(@Param("userId") userId:number,@Body('sex') address:string):Promise<UserInfor>{
+  async updateAddress(@Param("userId") userId:number,@Body('address') address:string):Promise<UserInfor>{
 
     return await this.userService.updateAddress(userId, address);
   }

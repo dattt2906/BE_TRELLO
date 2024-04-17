@@ -2,13 +2,14 @@ export class UsersInfotDto {
 
   
     display_name: string;
+    userId:number;
 
-    age:number;
+    age?:number;
     
-    sex:string
+    sex?:string
   
-    address:string;
-    userId?:number;
+    address?:string;
+    
 
   
 
