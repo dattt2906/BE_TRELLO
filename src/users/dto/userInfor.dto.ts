@@ -9,6 +9,7 @@ export class UsersInfotDto {
     sex?:string
   
     address?:string;
+    avatarImg?:string
     
 
   

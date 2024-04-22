@@ -8,6 +8,8 @@ export class UserInfor {
     @Column()
     display_name: string;
     @Column({default:null})
+    avatarImg:string
+    @Column({default:null})
     age:number;
     @Column({default:null})
     sex:string

@@ -58,26 +58,17 @@ export class UsersController {
   async findUserInforById(@Param('userId') userId:number):Promise<UserInfor>{
   return await this.userService.findUserInforById(userId)
     }
-  
-  @Put('update-display_name/:userId')
-  async updateDisplayName(@Param('userId') userId:number, @Body('display_name') display_Name: string):Promise<UserInfor>{
-    return await this.userService.updateDisplayName(userId,display_Name);
+  @Put("update-userinfo/:userId")
+  async updateUserInfo(@Param("userId") userId:number, @Body() userinfo:UsersInfotDto):Promise<UserInfor>{
+    return await this.userService.updateUserInfo(userId, userinfo)
   }
-  @Put('update-age/:userId')
-  async updateAge(@Param('userId') userId:number, @Body('age') age: number):Promise<UserInfor>{
-    return await this.userService.updateAge(userId,age);
-  }
-  @Put('update-sex/:userId')
-  async updateSex(@Param("userId") userId:number,@Body('sex') sex:string):Promise<UserInfor>{
 
-    return await this.userService.updateSex(userId, sex);
-  }
-  @Put('update-address/:userId')
+  @Put("update-avatar/:userId")
+  async updateImage(@Param("userId") userId:number, @Body("avatarImg") avatarImg:string):Promise<UserInfor>{
+      return await this.userService.updateImage(userId,avatarImg)
+  }  
   
-  async updateAddress(@Param("userId") userId:number,@Body('address') address:string):Promise<UserInfor>{
-
-    return await this.userService.updateAddress(userId, address);
-  }
+  
   
   
 }

@@ -101,46 +101,29 @@ export class UsersService {
         }  
             })
     }
-    async updateDisplayName(userId:number,display_name:string):Promise<UserInfor>{
-
-        const userInfor= await this.findUserInforById(userId);
-        if(!userInfor){
-            throw new NotFoundException("user does not find");
+    async updateImage(userId:number, avatarImg:string):Promise<UserInfor>{
+        const userInfo=await this.findUserInforById(userId);
+        if(!userInfo){
+            throw new NotFoundException("userInfo does not find");
         }
-        await this.userInforRepository.update(userInfor, { display_name: display_name });
-        return await this.findUserInforById(userId)
-    }
-    async updateAge(userId:number,age:number):Promise<UserInfor>{
+        userInfo.avatarImg=avatarImg
+        return await this.userInforRepository.save(userInfo)
 
-        const userInfor= await this.findUserInforById(userId);
-        if(!userInfor){
-            throw new NotFoundException("user does not find");
-        }
-        await this.userInforRepository.update(userInfor, { age: age });
-        return await this.findUserInforById(userId)
     }
 
-    async updateSex(userId:number, sex:string):Promise<UserInfor>{
-        const userInfor= await this.findUserInforById(userId);
-        
-        if(!userInfor){
-            throw new NotFoundException("user does not find");
-        }
-        await this.userInforRepository.update(userInfor, { sex: sex });
-        return await this.findUserInforById(userId)
+    async updateUserInfo(userId:number, userInfo:UsersInfotDto):Promise<UserInfor>{
 
-    }
-    async updateAddress(userId:number, address:string):Promise<UserInfor>{
-        console.log(address)
-        const userInfor= await this.findUserInforById(userId);
-        console.log(userInfor)
-        if(!userInfor){
-            throw new NotFoundException("user does not find");
+        const userInfoFind=await this.findUserInforById(userId);
+        if(!userInfoFind){
+            throw new NotFoundException("user does not find")
         }
-        userInfor.address=address
-        await this.userInforRepository.save(userInfor)
+        userInfoFind.display_name=userInfo.display_name;
+        userInfoFind.age=userInfo.age;
+        userInfoFind.sex=userInfo.sex;
+        userInfoFind.address=userInfo.address
+        userInfoFind.avatarImg=userInfo.avatarImg
+       await this.userInforRepository.save(userInfoFind)
         return await this.findUserInforById(userId)
-
     }
 
     async updateUserActive(userId:number):Promise<User>{
