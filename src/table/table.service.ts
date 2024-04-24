@@ -6,6 +6,7 @@ import { ColumnDto } from './dto/column.dto';
 import { RowEntity } from './row.entity';
 import { RowDto } from './dto/row.dto';
 import { UsersService } from 'src/users/users.service';
+import { BoardService } from 'src/board/board.service';
 
 @Injectable()
 export class TableService {
@@ -16,7 +17,7 @@ export class TableService {
 
         @InjectRepository(RowEntity)
         private rowRepository: Repository<RowEntity>,
-        private userService: UsersService
+        private boardService: BoardService
     ) { }
     async findAllColumn(): Promise<ColumnEntity[]> {
         return await this.colRepository.find({
@@ -25,14 +26,15 @@ export class TableService {
 
     }
     async createColumn(col: ColumnDto): Promise<ColumnEntity> {
-        const user = await this.userService.findUserById(col.userId)
+        const board = await this.boardService.findBoardById(col.boardId)
         const newColumn = new ColumnEntity();
         newColumn.columnName = col.columnName;
-        newColumn.users = user
+        newColumn.board = board
         newColumn.sort=col.sort
         return await this.colRepository.save(newColumn);
         
     }
+    
     async findColumnById(colId: number): Promise<ColumnEntity> {
         return await this.colRepository.findOne({
 

@@ -1,12 +1,13 @@
 import { ColumnEntity } from "src/table/column.entity";
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany, OneToOne } from "typeorm";
 import { UserInfor } from "./userInfor.entity";
+import { Workspace } from "src/workspace/entity/workspace.entity";
 @Entity()
 export class User {
     @PrimaryGeneratedColumn()
     userId: number
     @Column()
-    username: string;
+    email: string;
     @Column()
     password: string;
     @Column({nullable:true})
@@ -14,8 +15,8 @@ export class User {
     @Column({default:false})
     isActive:boolean;
 
-    @OneToMany(() => ColumnEntity, (col) => col.users)
-    cols: ColumnEntity[];
+    @OneToMany(()=>Workspace,(workspace)=>workspace.user)
+    workspaces:Workspace[]
 
     @OneToOne(()=>UserInfor, (uInfor)=>uInfor.users)
 

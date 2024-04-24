@@ -21,11 +21,8 @@ export class AuthService {
 
     }
 
-
-
-
-    async signIn(username: string, password: string): Promise<{ access_token: string, id: number,Active:boolean|any }> {
-        const user = await this.usersService.findUserByName(username);
+    async signIn(email: string, password: string): Promise<{ access_token: string, id: number,Active:boolean|any }> {
+        const user = await this.usersService.findUserByName(email);
         if (user?.password !== password) {
             throw new UnauthorizedException("Thong tin tai khoan hoac mat khau khong chinh xac");
         }
@@ -35,7 +32,7 @@ export class AuthService {
                 throw new UnauthorizedException("Xac nhan trong mail truoc khi dang nhap");
             }
 
-            const payload = { sub: user.userId, username: user.username };
+            const payload = { sub: user.userId, email: user.email };
         return {
             access_token: await this.jwtService.signAsync(payload),
             id: user.userId,
@@ -46,20 +43,20 @@ export class AuthService {
         }
 
     }
-    async Register(username: string, password: string): Promise<{ regis_token: string, id: number }> {
+    async Register(email: string, password: string): Promise<{ regis_token: string, id: number }> {
 
-        const user = await this.usersService.findUserByName(username);
+        const user = await this.usersService.findUserByName(email);
         if (user) {
 
-            throw new UnauthorizedException("Ten tai khoan da co nguoi su dung");
+            throw new UnauthorizedException("Tai khoan da co nguoi su dung");
         }
-        const userNew = await this.usersService.createUser({ username, password })
-        const user1 ={display_name:userNew.username, userId:userNew.userId}
+        const userNew = await this.usersService.createUser({ email, password })
+        const user1 ={display_name:userNew.email, userId:userNew.userId}
         await this.usersService.createUserInfor(user1)
-        const payload = { sub: userNew.userId, username: userNew.username };
+        const payload = { sub: userNew.userId, email: userNew.email };
         const regis_token = await this.jwtService.signAsync(payload);
         const id = userNew.userId
-        await this.mailerService.sendEmailLogin(regis_token, "dattt@rubicontechno.com")
+        await this.mailerService.sendEmailLogin(regis_token,userNew.email)
         return {
             regis_token,
             id
@@ -94,15 +91,15 @@ export class AuthService {
 
     }
 
-    async forgetPass(username:string):Promise<any>{
-        console.log(username)
-        const user = await this.usersService.findUserByName(username);
+    async forgetPass(email:string):Promise<any>{
+     
+        const user = await this.usersService.findUserByName(email);
         if (!user) {
             throw new UnauthorizedException("Email chua dang ki");
         }
-        const payload = { sub: user.userId, username: user.username };
+        const payload = { sub: user.userId, email: user.email };
         const forgetPass_token = await this.jwtService.signAsync(payload);
-        await this.mailerService.sendEmailForgotPass(forgetPass_token, "dattt@rubicontechno.com")
+        await this.mailerService.sendEmailForgotPass(forgetPass_token, user.email)
         return {
             forgetPass_token
         };

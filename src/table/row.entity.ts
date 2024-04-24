@@ -8,7 +8,7 @@ export class RowEntity {
     rowId: number;
     @Column()
     content: string;
-    @Column()
+    @Column({default:null})
     sort:number;
 
     @CreateDateColumn()

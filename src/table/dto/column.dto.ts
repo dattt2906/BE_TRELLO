@@ -1,6 +1,6 @@
 export class ColumnDto{
     columnName:string;
-    userId:number;
+    boardId:number;
     sort?:number;
     columnId?:number;
 }

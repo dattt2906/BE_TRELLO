@@ -24,8 +24,13 @@ export class UsersService {
 
             relations: {
 
-                cols: {
-                    rows: true
+                workspaces: {
+                    boards: {
+
+                        cols:{
+                            rows:true
+                        }
+                    }
 
                 }
             }
@@ -34,8 +39,8 @@ export class UsersService {
     }
     async createUser(user: UsersDto): Promise<User> {
         
-        const { username, password} = user
-        const userCreate= await this.usersRepository.save({username,password});
+        const { email, password} = user
+        const userCreate= await this.usersRepository.save({email,password});
         
         return userCreate;
     }
@@ -44,9 +49,13 @@ export class UsersService {
             where: { userId: userId },
             relations:
             {
+                workspaces: {
+                    boards: {
 
-                cols: {
-                    rows: true
+                        cols:{
+                            rows:true
+                        }
+                    }
 
                 }
             }
@@ -62,9 +71,9 @@ export class UsersService {
     }
 
     
-    async findUserByName(userNameInput:string): Promise<User> {
-       const user= await this.usersRepository.findOneBy({
-            username: userNameInput
+    async findUserByName(email:string): Promise<User> {
+       const user= await this.usersRepository.findOne({
+           where:{ email: email}
         })
         console.log(user)
         return user;

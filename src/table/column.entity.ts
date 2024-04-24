@@ -1,6 +1,7 @@
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany, CreateDateColumn, ManyToOne, JoinColumn } from "typeorm";
 import { RowEntity } from "./row.entity";
 import { User } from "src/users/user.entity";
+import { Board } from "src/board/entity/board.entity";
 
 
 @Entity()
@@ -9,7 +10,7 @@ export class ColumnEntity {
     columnId: number;
     @Column()
     columnName: string;
-    @Column()
+    @Column({default:null})
     sort:number;
 
     @CreateDateColumn()
@@ -18,9 +19,9 @@ export class ColumnEntity {
 
     rows: RowEntity[];
 
-    @ManyToOne(() => User, (user) => user.cols)
-    @JoinColumn({ name: "userId" })
-    users: User;
+    @ManyToOne(() => Board, (board) => board.cols)
+    @JoinColumn({ name: "boardId" })
+    board:Board
 
 
 

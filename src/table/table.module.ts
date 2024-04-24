@@ -9,16 +9,15 @@ import { UsersService } from 'src/users/users.service';
 import { APP_GUARD } from '@nestjs/core';
 import { AuthGuard } from 'src/auth/decorate/auth.guard';
 import { UserInfor } from 'src/users/userInfor.entity';
+import { Board } from 'src/board/entity/board.entity';
+import { BoardService } from 'src/board/board.service';
+import { Workspace } from 'src/workspace/entity/workspace.entity';
+import { WorkspaceService } from 'src/workspace/workspace.service';
 
 
 @Module({
-  imports: [TypeOrmModule.forFeature([ColumnEntity, RowEntity, User,UserInfor])],
+  imports: [TypeOrmModule.forFeature([ColumnEntity, RowEntity,Board,Workspace,User,UserInfor])],
   controllers: [TableController],
-  providers: [TableService, UsersService,
-    // {
-    //   provide: APP_GUARD,
-    //   useClass: AuthGuard,
-    // },
-  ]
+  providers: [TableService,BoardService,WorkspaceService,UsersService]
 })
 export class TableModule { }

@@ -54,7 +54,7 @@ export class UsersController {
     return await this.userService.createUserInfor(userInfor);
   }
 
-  @Get('find-userinfor-by-userId/:userId')
+  @Get('find-userinfo-by-userId/:userId')
   async findUserInforById(@Param('userId') userId:number):Promise<UserInfor>{
   return await this.userService.findUserInforById(userId)
     }

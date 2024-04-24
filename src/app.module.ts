@@ -11,6 +11,10 @@ import { AuthModule } from './auth/auth.module';
 import { UserInfor } from './users/userInfor.entity';
 import { MailerModule } from './mailer/mailer.module';
 import { ConfigModule } from '@nestjs/config';
+import { WorkspaceModule } from './workspace/workspace.module';
+import { BoardModule } from './board/board.module';
+import { Workspace } from './workspace/entity/workspace.entity';
+import { Board } from './board/entity/board.entity';
 
 
 @Module({
@@ -21,9 +25,9 @@ import { ConfigModule } from '@nestjs/config';
     username: 'root',
     password: '123456',
     database: 'nestjs',
-    entities: [User, ColumnEntity, RowEntity,UserInfor],
+    entities: [User, ColumnEntity, RowEntity,UserInfor,Workspace,Board],
     synchronize: true,
-  }), UsersModule, TableModule, AuthModule, MailerModule],
+  }), UsersModule, TableModule, AuthModule, MailerModule, WorkspaceModule, BoardModule],
   controllers: [AppController],
   providers: [AppService],
 })
