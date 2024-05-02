@@ -13,10 +13,11 @@ import { Board } from 'src/board/entity/board.entity';
 import { BoardService } from 'src/board/board.service';
 import { Workspace } from 'src/workspace/entity/workspace.entity';
 import { WorkspaceService } from 'src/workspace/workspace.service';
+import { RowDetail } from './rowDetails.entity';
 
 
 @Module({
-  imports: [TypeOrmModule.forFeature([ColumnEntity, RowEntity,Board,Workspace,User,UserInfor])],
+  imports: [TypeOrmModule.forFeature([ColumnEntity, RowEntity,RowDetail,Board,Workspace,User,UserInfor])],
   controllers: [TableController],
   providers: [TableService,BoardService,WorkspaceService,UsersService]
 })

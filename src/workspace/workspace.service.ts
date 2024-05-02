@@ -28,7 +28,8 @@ export class WorkspaceService {
         return await this.workspaceRepository.findOne({
             where:{workspaceId : workspaceId},
             relations:{
-
+                user:true,
+                
                 boards:{
                     cols:{
                         rows:true

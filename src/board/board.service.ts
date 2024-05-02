@@ -31,7 +31,14 @@ export class BoardService {
         return await this.boardRepository.findOne({
             where:{boardId:boardId},
             relations:{
-                workspace:true,cols:true
+                workspace:{
+                    user:true
+                }
+                
+                
+                ,cols:{
+                    rows:true
+                }
             }
         })
     }

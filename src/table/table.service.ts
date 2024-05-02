@@ -7,6 +7,8 @@ import { RowEntity } from './row.entity';
 import { RowDto } from './dto/row.dto';
 import { UsersService } from 'src/users/users.service';
 import { BoardService } from 'src/board/board.service';
+import { RowdetailDto } from './dto/rowDetails.dto';
+import { RowDetail } from './rowDetails.entity';
 
 @Injectable()
 export class TableService {
@@ -17,7 +19,10 @@ export class TableService {
 
         @InjectRepository(RowEntity)
         private rowRepository: Repository<RowEntity>,
-        private boardService: BoardService
+        private boardService: BoardService,
+
+        @InjectRepository(RowDetail)
+        private rowDetailRepository:Repository<RowDetail>,
     ) { }
     async findAllColumn(): Promise<ColumnEntity[]> {
         return await this.colRepository.find({
@@ -53,6 +58,13 @@ export class TableService {
         newRow.content = row.content;
         newRow.cols = col;
         newRow.sort=row.sort
+        const Row = await this.rowRepository.save(newRow)
+        const rowDetail= {contentName:row.content,rowId:Row.rowId}
+        await this.createRowDetail(rowDetail)
+
+        return Row
+
+         
 
         return await this.rowRepository.save(newRow);
     }
@@ -95,6 +107,7 @@ export class TableService {
         rowChange ={...rowChange,...row};
         return this.rowRepository.save(rowChange);
     }
+    
     async UpdateColumn(columns:ColumnDto[]):Promise<any>{
         const promises = columns.map(column => {
             let columnId = column.columnId;
@@ -114,6 +127,16 @@ export class TableService {
         await Promise.all(promises);
     
         return "updated-row";
+    }
+
+    async createRowDetail(rowDetail:RowdetailDto):Promise<RowDetail>{
+        const row = await this.findRowById(rowDetail.rowId)
+        const newRowDetail= new RowDetail();
+        newRowDetail.content=row.content,
+        newRowDetail.description=rowDetail.description,
+        newRowDetail.activity= rowDetail.activity,
+        newRowDetail.row=row;
+        return await this.rowDetailRepository.save(newRowDetail)
     }
 
 }
