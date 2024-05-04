@@ -5,6 +5,7 @@ export class RowdetailDto {
     rowId:number;
 
     description?:string;
+    attachment?:string;
     activity?:string
     
 

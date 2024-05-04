@@ -11,11 +11,13 @@ export class RowDetail {
     @Column({default:null})
     description:string
     @Column({default:null})
+    attachment:string
+    @Column({default:null})
     activity:string;
    
 
-    @OneToOne(() => RowEntity, (row) => row.rowDetail)
-    @JoinColumn({name:"rowId"})
+    @OneToOne(() => RowEntity, (row) => row.rowDetail, {onDelete:'CASCADE'})
+    @JoinColumn({name:"rowId"}) 
     row:RowEntity
 
 }

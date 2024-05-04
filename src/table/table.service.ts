@@ -63,15 +63,14 @@ export class TableService {
         await this.createRowDetail(rowDetail)
 
         return Row
-
-         
-
-        return await this.rowRepository.save(newRow);
     }
     async findRowById(rowId: number): Promise<RowEntity> {
         return await this.rowRepository.findOne({
 
-            where: { rowId: rowId }
+            where: { rowId: rowId },
+            relations:{
+                cols:true
+            }
 
         });
     }
@@ -134,9 +133,17 @@ export class TableService {
         const newRowDetail= new RowDetail();
         newRowDetail.content=row.content,
         newRowDetail.description=rowDetail.description,
+        newRowDetail.attachment=rowDetail.attachment,
         newRowDetail.activity= rowDetail.activity,
         newRowDetail.row=row;
         return await this.rowDetailRepository.save(newRowDetail)
+    }
+    async findRowDetailById(rowId:number):Promise<RowDetail>{
+
+        return await this.rowDetailRepository.findOne({
+                where:{row:{rowId:rowId},
+        }  
+            })
     }
 
 }
