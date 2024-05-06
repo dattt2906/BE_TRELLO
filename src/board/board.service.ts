@@ -24,6 +24,7 @@ export class BoardService {
         const newBoard= new Board()
         newBoard.boardname= board.boardname
         newBoard.workspace=workspace
+        newBoard.boardbackground= board.boardbackground
        
         return await this.boardRepository.save(newBoard)
     }

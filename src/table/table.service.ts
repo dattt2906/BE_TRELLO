@@ -145,5 +145,17 @@ export class TableService {
         }  
             })
     }
+    async updateRowDetail(rowId:number, rowDetail:RowdetailDto):Promise<RowDetail>{
+        const rowDetailFind= await this.findRowDetailById(rowId);
+        if(!rowDetailFind){
+
+            throw new NotFoundException("rowdetail does not find")
+        }
+        rowDetailFind.description=rowDetail.description;
+        rowDetailFind.attachment= rowDetail.attachment;
+        rowDetailFind.activity=rowDetail.activity
+        await this.rowDetailRepository.save(rowDetailFind)
+        return await this.findRowDetailById(rowId)
+    }
 
 }

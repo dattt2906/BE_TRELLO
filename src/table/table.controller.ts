@@ -6,6 +6,7 @@ import { RowEntity } from './row.entity';
 import { RowDto } from './dto/row.dto';
 import { Public } from 'src/auth/decorate/auth.guard';
 import { RowDetail } from './rowDetails.entity';
+import { RowdetailDto } from './dto/rowDetails.dto';
 
 @Controller('table')
 export class TableController {
@@ -73,6 +74,11 @@ export class TableController {
     async findUserInforById(@Param('rowId') rowId:number):Promise<RowDetail>{
     return await this.tableService.findRowDetailById(rowId)
       }
+
+  @Put("update-rowDetail/:rowId")
+  async updateUserInfo(@Param("rowId") rowId:number, @Body() rowDetail:RowdetailDto):Promise<RowDetail>{
+    return await this.tableService.updateRowDetail(rowId, rowDetail)
+  }
 
     
 
