@@ -16,6 +16,7 @@ import { BoardModule } from './board/board.module';
 import { Workspace } from './workspace/entity/workspace.entity';
 import { Board } from './board/entity/board.entity';
 import { RowDetail } from './table/rowDetails.entity';
+import { EventModule } from './event/event.module';
 
 
 @Module({
@@ -28,7 +29,7 @@ import { RowDetail } from './table/rowDetails.entity';
     database: 'nestjs',
     entities: [User, ColumnEntity, RowEntity,UserInfor,Workspace,Board, RowDetail],
     synchronize: true,
-  }), UsersModule, TableModule, AuthModule, MailerModule, WorkspaceModule, BoardModule],
+  }), UsersModule, TableModule, AuthModule, MailerModule, WorkspaceModule, BoardModule, EventModule],
   controllers: [AppController],
   providers: [AppService],
 })
