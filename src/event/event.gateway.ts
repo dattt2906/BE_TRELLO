@@ -6,9 +6,10 @@ import {
     SubscribeMessage,
     WebSocketGateway,
     WebSocketServer,
-    WsResponse
+    WsResponse,
+    
   } from "@nestjs/websockets";
-  import { Server, Socket } from "socket.io";
+  import io,{ Server, Socket } from "socket.io";
   
   @WebSocketGateway(8001, {
     cors: {
@@ -17,8 +18,11 @@ import {
   })
   export class EventsGateway implements OnGatewayConnection, OnGatewayDisconnect {
     private readonly connectedClients: Map<string, Socket> = new Map();
+
+    
   
-    @WebSocketServer() server: Server;
+    @WebSocketServer()
+     server: Server;
   
     handleConnection(socket: Socket) {
       console.log("connect", socket.id);
@@ -29,12 +33,27 @@ import {
       console.log("disconnect", socket.id);
       this.connectedClients.delete(socket.id);
     }
-    @SubscribeMessage('text-chat')
-    handleMessage(@MessageBody() message :{nickname, message}){
-
-        console.log(message)
+    @SubscribeMessage('add-column')
+    handleMessage(@MessageBody() data:any){
+        console.log(data)
+        this.server.emit("message", data)
+    }
+    @SubscribeMessage('add-card')
+    handleCard(@MessageBody() data:any){
+        console.log(data)
+        this.server.emit("message", data)
+    }
+    @SubscribeMessage('del-column')
+    handleDelCol(@MessageBody() data:any){
+        console.log(data)
+        this.server.emit("message", data)
     }
   
+    @SubscribeMessage('del-card')
+    handleDelCard(@MessageBody() data:any){
+        console.log(data)
+        this.server.emit("message", data)
+    }
     @SubscribeMessage("join-room")
     handleJoinRoom(socket: Socket, roomId: string) {
       socket.join(roomId);
@@ -46,11 +65,11 @@ import {
       this.server.to(roomId).emit("message", content);
     }
   
-    @SubscribeMessage("add-card")
-    handleAddCard(socket: Socket, payload: any): void {
-      const { boardId, content } = payload;
-      this.server.to(boardId).emit("add-card", content);
-    }
+    // @SubscribeMessage("add-card")
+    // handleAddCard(socket: Socket, payload: any): void {
+    //   const { boardId, content } = payload;
+    //   this.server.to(boardId).emit("add-card", content);
+    // }
     @SubscribeMessage("server-event")
     handleServerEvent(socket:Socket, data:any):void{
 
