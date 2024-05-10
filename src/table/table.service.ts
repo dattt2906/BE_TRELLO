@@ -45,7 +45,9 @@ export class TableService {
 
             where: { columnId: colId },
             relations: {
-                rows: true
+                rows: {
+                    cols:true
+                }
             }
         });
     }

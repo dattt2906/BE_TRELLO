@@ -22,6 +22,7 @@ export class WorkspaceService {
         const newWorkspace= new Workspace()
         newWorkspace.workspacename=workspace.workspacename;
         newWorkspace.user=user
+        newWorkspace.workspaceDetail=workspace.workspaceDetail;
         return await this.workspaceRepository.save(newWorkspace)
     }
     async findWorkspaceById(workspaceId:number):Promise<Workspace>{

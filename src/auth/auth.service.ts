@@ -24,12 +24,12 @@ export class AuthService {
     async signIn(email: string, password: string): Promise<{ access_token: string, id: number,Active:boolean|any }> {
         const user = await this.usersService.findUserByName(email);
         if (user?.password !== password) {
-            throw new UnauthorizedException("Thong tin tai khoan hoac mat khau khong chinh xac");
+            throw new UnauthorizedException("The account or password information is not exactly");
         }
         else{
 
             if(user.isActive===false){
-                throw new UnauthorizedException("Xac nhan trong mail truoc khi dang nhap");
+                throw new UnauthorizedException("Confirm in email before signing");
             }
 
             const payload = { sub: user.userId, email: user.email };
@@ -48,7 +48,7 @@ export class AuthService {
         const user = await this.usersService.findUserByName(email);
         if (user) {
 
-            throw new UnauthorizedException("Tai khoan da co nguoi su dung");
+            throw new UnauthorizedException("The account has someone use");
         }
         const userNew = await this.usersService.createUser({ email, password })
         const user1 ={display_name:userNew.email, userId:userNew.userId}
@@ -95,7 +95,7 @@ export class AuthService {
      
         const user = await this.usersService.findUserByName(email);
         if (!user) {
-            throw new UnauthorizedException("Email chua dang ki");
+            throw new UnauthorizedException("The email is not registed");
         }
         const payload = { sub: user.userId, email: user.email };
         const forgetPass_token = await this.jwtService.signAsync(payload);
@@ -138,7 +138,7 @@ export class AuthService {
         }
         
         
-        throw new UnauthorizedException("mat khau phai it nhat 6 ki tu bao gom so va chu");
+        throw new UnauthorizedException("The password must have at least 6 letters including number and length");
 
     }
     

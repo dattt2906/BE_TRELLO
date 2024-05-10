@@ -35,10 +35,10 @@ export class BoardService {
                 workspace:{
                     user:true
                 }
-                
-                
                 ,cols:{
-                    rows:true
+                    rows:{
+                        cols:true
+                    }
                 }
             }
         })
