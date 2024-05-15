@@ -21,7 +21,7 @@ export class WorkspaceService {
         }
         const newWorkspace= new Workspace()
         newWorkspace.workspacename=workspace.workspacename;
-        newWorkspace.user=user
+        newWorkspace.users=[user]
         newWorkspace.workspaceDetail=workspace.workspaceDetail;
         return await this.workspaceRepository.save(newWorkspace)
     }
@@ -29,7 +29,9 @@ export class WorkspaceService {
         return await this.workspaceRepository.findOne({
             where:{workspaceId : workspaceId},
             relations:{
-                user:true,
+                users:{
+                    userInfors:true
+                },
                 
                 boards:{
                     cols:{
@@ -39,4 +41,24 @@ export class WorkspaceService {
             }
         })
     }
+
+    async addUserInWorkspace(workspaceId:number, userId:number):Promise<any>{
+const user= await this.userService.findUserById(userId);
+if(!user){
+    throw new NotFoundException("user does not find");
 }
+const workspaceFind= await this.findWorkspaceById(workspaceId)
+if(!workspaceFind){
+    throw new NotFoundException("workspace does not find");
+
+}
+
+workspaceFind.users.push(user)
+return await this.workspaceRepository.save(workspaceFind)
+
+    }
+
+
+ 
+}
+

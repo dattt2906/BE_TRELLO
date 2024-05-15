@@ -2,6 +2,7 @@ import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { WorkspaceService } from './workspace.service';
 import { WorkspaceDto } from './dto/workspace.dto';
 import { Workspace } from './entity/workspace.entity';
+import { AddUserDto } from './dto/addUserInWorkspace.dto';
 
 @Controller('workspace')
 export class WorkspaceController {
@@ -16,4 +17,9 @@ export class WorkspaceController {
   async findWorkspaceById(@Param("workspaceId") workspaceId:number):Promise<Workspace>{
     return await this.workspaceService.findWorkspaceById(workspaceId)
   }
+  @Post("add-user-in-workspace")
+  async addUserInWorkspace(@Body() addUser:AddUserDto):Promise<any>{
+    return await this.workspaceService.addUserInWorkspace(addUser.workspaceId, addUser.userId)
+  }
+
 }

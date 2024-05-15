@@ -33,7 +33,7 @@ export class BoardService {
             where:{boardId:boardId},
             relations:{
                 workspace:{
-                    user:true
+                    users:true
                 }
                 ,cols:{
                     rows:{

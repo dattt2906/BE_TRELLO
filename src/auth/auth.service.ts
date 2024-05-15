@@ -66,6 +66,22 @@ export class AuthService {
 
     }
 
+    async inviteMember(email:string, workspaceId:number):Promise<any>{
+
+        const user = await this.usersService.findUserByName(email);
+        if (!user) {
+
+            throw new UnauthorizedException("The account is not register");
+        }
+
+        const payload ={sub:user.userId, workspaceId:workspaceId};
+        // const invite_token= await this.jwtService.signAsync(payload);
+        await this.mailerService.sendEmailInvite(user.userId, email, workspaceId)
+        
+
+
+    }
+
     async confirm(token: string): Promise<any> {
 
         const jwt = require('jsonwebtoken');
@@ -104,6 +120,9 @@ export class AuthService {
             forgetPass_token
         };
     }
+
+
+
     async decodeToken(token:string):Promise<any>{
 
         const jwt = require('jsonwebtoken');

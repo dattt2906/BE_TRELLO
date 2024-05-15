@@ -1,5 +1,5 @@
 import { ColumnEntity } from "src/table/column.entity";
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany, OneToOne } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany, OneToOne, ManyToMany, JoinTable } from "typeorm";
 import { UserInfor } from "./userInfor.entity";
 import { Workspace } from "src/workspace/entity/workspace.entity";
 @Entity()
@@ -15,7 +15,8 @@ export class User {
     @Column({default:false})
     isActive:boolean;
 
-    @OneToMany(()=>Workspace,(workspace)=>workspace.user)
+    @ManyToMany(()=>Workspace,(workspace)=>workspace.users)
+    @JoinTable()
     workspaces:Workspace[]
 
     @OneToOne(()=>UserInfor, (uInfor)=>uInfor.users)

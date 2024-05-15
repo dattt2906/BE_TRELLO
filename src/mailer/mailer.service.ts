@@ -58,6 +58,24 @@ export class MailerService {
       
 
     }
+    async sendEmailInvite(userId:number, email:string, workspaceId:number):Promise<any>{
+
+      const transport= this.mailTransport();
+      const inviteLink=`http://localhost:3000/WorkspaceArea/?userId=${userId}&workspaceId=${workspaceId}`;
+      const options:Mail.Options={
+        from:{name:'Your App', address:"default@gmail.com" } ,
+          to:email,
+          subject:"Invite member to workspace",
+          html:`<a href="${inviteLink}"><button style="background-color: #4CAF50")">click here to join workspace</button> </a><p>Cherr!</p>`
+      }
+      try{
+        const result=await transport.sendMail(options);
+        return result;
+      } catch(error){
+        console.log('Error:', error)
+      }
+      
+    }
 
 
 

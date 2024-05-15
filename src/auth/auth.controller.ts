@@ -3,6 +3,7 @@ import { AuthService } from './auth.service';
 import { AccountDto } from './dto/account.dto';
 import { Public } from './decorate/auth.guard';
 import { Matches } from 'class-validator';
+import { InviteMemberDto } from './dto/inviteMember.dto';
 const PASSWORD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{6,24}$/;
 
 @Controller('auth')
@@ -37,7 +38,11 @@ export class AuthController {
   
       return await this.authService.updateUser(userId, password)
     }
-    
+    @Post("invite-member")
+    async inviteMember(@Body() inviteMember:InviteMemberDto):Promise<any>{
+
+      return await this.authService.inviteMember(inviteMember.email, inviteMember.workspaceId)
+    }
 
    
 

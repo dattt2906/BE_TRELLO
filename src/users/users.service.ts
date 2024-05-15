@@ -49,6 +49,8 @@ export class UsersService {
             where: { userId: userId },
             relations:
             {
+                userInfors:true,
+                
                 workspaces: {
                     boards: {
 
