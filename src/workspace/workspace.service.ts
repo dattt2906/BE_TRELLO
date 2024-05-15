@@ -21,7 +21,7 @@ export class WorkspaceService {
         }
         const newWorkspace= new Workspace()
         newWorkspace.workspacename=workspace.workspacename;
-        newWorkspace.user=user
+        newWorkspace.users=[user]
         newWorkspace.workspaceDetail=workspace.workspaceDetail;
         return await this.workspaceRepository.save(newWorkspace)
     }
@@ -29,7 +29,7 @@ export class WorkspaceService {
         return await this.workspaceRepository.findOne({
             where:{workspaceId : workspaceId},
             relations:{
-                user:true,
+                users:true,
                 
                 boards:{
                     cols:{
