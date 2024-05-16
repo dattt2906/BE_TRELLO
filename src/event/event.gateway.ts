@@ -13,7 +13,7 @@ import {
   
   @WebSocketGateway(8001, {
     cors: {
-      origin: "*"
+      origin: '*',
     }
   })
   export class EventsGateway implements OnGatewayConnection, OnGatewayDisconnect {
@@ -33,15 +33,17 @@ import {
       console.log("disconnect", socket.id);
       this.connectedClients.delete(socket.id);
     }
-    @SubscribeMessage('add-column')
-    handleMessage(@MessageBody() data:any){
-        console.log(data)
-        this.server.emit("message", data)
+    @SubscribeMessage("add-column")
+    handleAddColumn(socket: Socket, roomId: string) {
+      console.log(roomId)
+      // socket.join(roomId);
+      this.server.to(roomId).emit("message-add-column","add-column")
     }
-    @SubscribeMessage('add-card')
-    handleCard(@MessageBody() data:any){
-        console.log(data)
-        this.server.emit("message", data)
+    @SubscribeMessage("add-card")
+    handleAddCard(socket: Socket, roomId: string) {
+      console.log(roomId)
+      // socket.join(roomId);
+      this.server.to(roomId).emit("message-add-card","add-card")
     }
     @SubscribeMessage('del-column')
     handleDelCol(@MessageBody() data:any){
@@ -56,7 +58,9 @@ import {
     }
     @SubscribeMessage("join-room")
     handleJoinRoom(socket: Socket, roomId: string) {
+      console.log(roomId)
       socket.join(roomId);
+      this.server.to(roomId).emit("message","Hello from server")
     }
   
     @SubscribeMessage("message")
