@@ -14,6 +14,9 @@ export class RowDetail {
     attachment:string
     @Column({default:null})
     activity:string;
+    @Column({default:null})
+    deadline:string
+
    
 
     @OneToOne(() => RowEntity, (row) => row.rowDetail, {onDelete:'CASCADE'})

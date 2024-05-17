@@ -45,17 +45,34 @@ import {
       // socket.join(roomId);
       this.server.to(roomId).emit("message-add-card","add-card")
     }
-    @SubscribeMessage('del-column')
-    handleDelCol(@MessageBody() data:any){
-        console.log(data)
-        this.server.emit("message", data)
+    @SubscribeMessage("del-column")
+    handleDelColumn(socket: Socket, roomId: string) {
+      console.log(roomId)
+      // socket.join(roomId);
+      this.server.to(roomId).emit("message-del-column","del-column")
     }
   
-    @SubscribeMessage('del-card')
-    handleDelCard(@MessageBody() data:any){
-        console.log(data)
-        this.server.emit("message", data)
+    @SubscribeMessage("del-card")
+    handleDelCard(socket: Socket, roomId: string) {
+      console.log(roomId)
+      // socket.join(roomId);
+      this.server.to(roomId).emit("message-del-card","del-card")
     }
+
+    @SubscribeMessage("drag-column")
+    handleDragColumn(socket: Socket, roomId: string) {
+      console.log(roomId)
+      // socket.join(roomId);
+      this.server.to(roomId).emit("message-drag-column","drag-column")
+    }
+    @SubscribeMessage("drag-card")
+    handleDragCard(socket: Socket, roomId: string) {
+      console.log(roomId)
+      // socket.join(roomId);
+      this.server.to(roomId).emit("message-drag-card","drag-card")
+    }
+
+
     @SubscribeMessage("join-room")
     handleJoinRoom(socket: Socket, roomId: string) {
       console.log(roomId)

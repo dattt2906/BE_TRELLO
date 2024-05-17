@@ -7,6 +7,7 @@ export class RowdetailDto {
     description?:string;
     attachment?:string;
     activity?:string
+    deadline?:string;
     
 
   

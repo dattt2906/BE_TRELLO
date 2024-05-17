@@ -7,6 +7,7 @@ import { RowDto } from './dto/row.dto';
 import { Public } from 'src/auth/decorate/auth.guard';
 import { RowDetail } from './rowDetails.entity';
 import { RowdetailDto } from './dto/rowDetails.dto';
+import { promises } from 'dns';
 
 @Controller('table')
 export class TableController {
@@ -31,6 +32,10 @@ export class TableController {
     @Get("find-column-by-id/:columnId")
     async getUserById(@Param("columnId") columnId: number): Promise<ColumnEntity> {
         return await this.tableService.findColumnById(columnId);
+    }
+    @Get("find-row-by-id/:rowId")
+    async findRowById(@Param("rowId") rowId: number): Promise<RowEntity> {
+        return await this.tableService.findRowById(rowId);
     }
     @Get("find-all-row")
     async findAllRow(): Promise<RowEntity[]> {
@@ -78,6 +83,11 @@ export class TableController {
   @Put("update-rowDetail/:rowId")
   async updateUserInfo(@Param("rowId") rowId:number, @Body() rowDetail:RowdetailDto):Promise<RowDetail>{
     return await this.tableService.updateRowDetail(rowId, rowDetail)
+  }
+
+  @Put("update-deadline-by-rowId/:rowId")
+  async updateDeadline(@Param("rowId") rowId:number, @Body('deadline') deadline:string):Promise<RowDetail>{
+    return await this.tableService.updateDeadline(rowId,deadline)
   }
 
     

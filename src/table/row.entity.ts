@@ -13,7 +13,7 @@ export class RowEntity {
     sort:number;
 
     @CreateDateColumn()
-    createdAt!: Date;
+    createdAt!: string;
     @ManyToOne(() => ColumnEntity, (col) => col.rows)
     @JoinColumn({ name: 'columnId' })
     cols: ColumnEntity;

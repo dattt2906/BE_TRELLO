@@ -137,14 +137,19 @@ export class TableService {
         newRowDetail.description=rowDetail.description,
         newRowDetail.attachment=rowDetail.attachment,
         newRowDetail.activity= rowDetail.activity,
+        newRowDetail.deadline=rowDetail.deadline
         newRowDetail.row=row;
         return await this.rowDetailRepository.save(newRowDetail)
     }
     async findRowDetailById(rowId:number):Promise<RowDetail>{
 
         return await this.rowDetailRepository.findOne({
-                where:{row:{rowId:rowId},
-        }  
+                where:{row:{rowId:rowId}},
+                relations:{
+                    row:{
+                        cols:true
+                    }
+                }  
             })
     }
     async updateRowDetail(rowId:number, rowDetail:RowdetailDto):Promise<RowDetail>{
@@ -156,8 +161,22 @@ export class TableService {
         rowDetailFind.description=rowDetail.description;
         rowDetailFind.attachment= rowDetail.attachment;
         rowDetailFind.activity=rowDetail.activity
+        rowDetailFind.deadline=rowDetail.deadline
         await this.rowDetailRepository.save(rowDetailFind)
         return await this.findRowDetailById(rowId)
+    }
+
+    async updateDeadline(rowId:number, deadline:string):Promise<RowDetail>{
+          
+        const rowDetailFind= await this.findRowDetailById(rowId);
+        if(!rowDetailFind){
+
+            throw new NotFoundException("rowdetail does not find")
+        }
+        rowDetailFind.deadline=deadline;
+        await this.rowDetailRepository.save(rowDetailFind)
+        return await this.findRowDetailById(rowId)
+
     }
 
 }
