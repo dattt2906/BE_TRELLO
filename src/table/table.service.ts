@@ -45,9 +45,18 @@ export class TableService {
 
             where: { columnId: colId },
             relations: {
-                rows: {
-                    cols:true
-                }
+                rows: { 
+                    cols:true,
+                    rowDetail:true,
+                    comments:{
+                        user:{
+                            userInfors:true
+
+                        }
+                    }
+                },
+                
+                
             }
         });
     }
@@ -71,7 +80,13 @@ export class TableService {
 
             where: { rowId: rowId },
             relations:{
-                cols:true
+                cols:true,
+                rowDetail:true,
+                comments:{
+                    user:{
+                        userInfors:true
+                    }
+                }
             }
 
         });

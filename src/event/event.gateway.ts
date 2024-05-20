@@ -71,6 +71,12 @@ import {
       // socket.join(roomId);
       this.server.to(roomId).emit("message-drag-card","drag-card")
     }
+    @SubscribeMessage("add-deadline")
+    handleAddDeadline(socket: Socket, roomId: string) {
+      console.log(roomId)
+      // socket.join(roomId);
+      this.server.to(roomId).emit("message-add-deadline","add-deadline")
+    }
 
 
     @SubscribeMessage("join-room")

@@ -37,7 +37,8 @@ export class BoardService {
                 }
                 ,cols:{
                     rows:{
-                        cols:true
+                        cols:true,
+                        
                     }
                 }
             }
