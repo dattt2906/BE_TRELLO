@@ -9,6 +9,11 @@ import { Public } from 'src/auth/decorate/auth.guard';
 import { UserInfor } from './userInfor.entity';
 import { privateDecrypt } from 'crypto';
 import { UsersInfotDto } from './dto/userInfor.dto';
+
+import { CommentDto } from 'src/comment/dto/comment.dto';
+import { TableService } from 'src/table/table.service';
+import { WorkspaceService } from 'src/workspace/workspace.service';
+
 @Injectable()
 export class UsersService {
     constructor(
@@ -149,10 +154,6 @@ export class UsersService {
     return await this.usersRepository.save(user)
 
     }
-
-
-    
-
 
     
 }

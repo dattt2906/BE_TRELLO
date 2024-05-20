@@ -6,6 +6,8 @@ import { UsersDto } from './dto/users.dto';
 import { AuthGuard } from 'src/auth/decorate/auth.guard';
 import { UserInfor } from './userInfor.entity';
 import { UsersInfotDto } from './dto/userInfor.dto';
+import { CommentDto } from 'src/comment/dto/comment.dto';
+
 
 @Controller('users')
 export class UsersController {
@@ -67,6 +69,12 @@ export class UsersController {
   async updateImage(@Param("userId") userId:number, @Body("avatarImg") avatarImg:string):Promise<UserInfor>{
       return await this.userService.updateImage(userId,avatarImg)
   }  
+
+ 
+//  @Post("create-comment")
+//   async createComment( @Body() comment:CommentDto):Promise<Comment>{
+//     return await this.userService.createComment( comment)
+//   }
   
   
   

@@ -1,6 +1,7 @@
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany, CreateDateColumn, JoinColumn, ManyToOne, OneToOne } from "typeorm";
 import { ColumnEntity } from "./column.entity";
 import { RowDetail } from "./rowDetails.entity";
+import { Comment } from "src/comment/entity/comment.entity";
 
 
 @Entity()
@@ -13,12 +14,15 @@ export class RowEntity {
     sort:number;
 
     @CreateDateColumn()
-    createdAt!: string;
+    createdAt!: Date;
     @ManyToOne(() => ColumnEntity, (col) => col.rows)
     @JoinColumn({ name: 'columnId' })
     cols: ColumnEntity;
     @OneToOne(()=>RowDetail, (rowDetail)=> rowDetail.row)
     rowDetail:RowDetail
+
+    @OneToMany(()=>Comment, (comment)=>comment.row)
+    comments:Comment[]
 
     
 

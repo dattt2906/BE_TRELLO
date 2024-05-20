@@ -4,6 +4,8 @@ import { Workspace } from './entity/workspace.entity';
 import { Repository } from 'typeorm';
 import { WorkspaceDto } from './dto/workspace.dto';
 import { UsersService } from 'src/users/users.service';
+import { TableService } from 'src/table/table.service';
+import { BoardService } from 'src/board/board.service';
 
 @Injectable()
 export class WorkspaceService {
@@ -11,7 +13,9 @@ export class WorkspaceService {
         
             @InjectRepository(Workspace)
             private workspaceRepository: Repository<Workspace>,
-            private userService:UsersService
+            private userService:UsersService,
+            
+          
     ){}
 
     async createWorkspace(workspace:WorkspaceDto):Promise<Workspace>{

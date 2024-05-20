@@ -10,6 +10,11 @@ import { UsersService } from 'src/users/users.service';
 import { WorkspaceModule } from 'src/workspace/workspace.module';
 import { UserInfor } from 'src/users/userInfor.entity';
 
+import { TableService } from 'src/table/table.service';
+import { RowEntity } from 'src/table/row.entity';
+import { ColumnEntity } from 'src/table/column.entity';
+import { RowDetail } from 'src/table/rowDetails.entity';
+
 @Module({
   imports :[TypeOrmModule.forFeature([Board,Workspace,User,UserInfor])],
   controllers: [BoardController],

@@ -13,9 +13,18 @@ import { MailerService } from 'src/mailer/mailer.service';
 import { MailerModule } from 'src/mailer/mailer.module';
 import { ConfigModule } from '@nestjs/config';
 
+import { TableService } from 'src/table/table.service';
+import { RowEntity } from 'src/table/row.entity';
+import { ColumnEntity } from 'src/table/column.entity';
+import { Board } from 'src/board/entity/board.entity';
+import { Workspace } from 'src/workspace/entity/workspace.entity';
+import { BoardService } from 'src/board/board.service';
+import { WorkspaceService } from 'src/workspace/workspace.service';
+import { RowDetail } from 'src/table/rowDetails.entity';
+
 
 @Module({
-  imports:[TypeOrmModule.forFeature([User,UserInfor,]),
+  imports:[TypeOrmModule.forFeature([User,UserInfor]),
   JwtModule.register({
     global: true,
     secret: jwtConstants.secret,

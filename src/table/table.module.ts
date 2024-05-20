@@ -16,6 +16,7 @@ import { WorkspaceService } from 'src/workspace/workspace.service';
 import { RowDetail } from './rowDetails.entity';
 
 
+
 @Module({
   imports: [TypeOrmModule.forFeature([ColumnEntity, RowEntity,RowDetail,Board,Workspace,User,UserInfor])],
   controllers: [TableController],

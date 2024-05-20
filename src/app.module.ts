@@ -17,6 +17,8 @@ import { Workspace } from './workspace/entity/workspace.entity';
 import { Board } from './board/entity/board.entity';
 import { RowDetail } from './table/rowDetails.entity';
 import { EventModule } from './event/event.module';
+import { Comment } from './comment/entity/comment.entity';
+import { CommentModule } from './comment/comment.module';
 
 
 
@@ -26,11 +28,11 @@ import { EventModule } from './event/event.module';
     host: 'localhost',
     port: 3306,
     username: 'root',
-    password: '123456',
+    password: '01214155429a',
     database: 'nestjs',
-    entities: [User, ColumnEntity, RowEntity,UserInfor,Workspace,Board, RowDetail],
+    entities: [User, ColumnEntity, RowEntity,UserInfor,Workspace,Board, RowDetail, Comment],
     synchronize: true,
-  }), UsersModule, TableModule, AuthModule, MailerModule, WorkspaceModule, BoardModule,EventModule],
+  }), UsersModule, TableModule, AuthModule, MailerModule, WorkspaceModule, BoardModule,EventModule, CommentModule],
   controllers: [AppController],
   providers: [AppService],
 })
