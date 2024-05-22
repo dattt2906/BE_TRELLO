@@ -2,6 +2,7 @@ import { Entity, PrimaryGeneratedColumn, Column, OneToMany, CreateDateColumn, Jo
 import { ColumnEntity } from "./column.entity";
 import { RowDetail } from "./rowDetails.entity";
 import { Comment } from "src/comment/entity/comment.entity";
+import { TodoList } from "src/todolist/entity/todoList.entity";
 
 
 @Entity()
@@ -21,8 +22,11 @@ export class RowEntity {
     @OneToOne(()=>RowDetail, (rowDetail)=> rowDetail.row)
     rowDetail:RowDetail
 
-    @OneToMany(()=>Comment, (comment)=>comment.row)
+    @OneToMany(()=>Comment, (comment)=>comment.row ,{onDelete:'CASCADE'})
     comments:Comment[]
+
+    @OneToMany(()=>TodoList, (todolist)=> todolist.row,{onDelete:'CASCADE'})
+    todoLists:TodoList[]
 
     
 

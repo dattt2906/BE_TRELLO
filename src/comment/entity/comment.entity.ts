@@ -17,7 +17,7 @@ export class Comment {
     @JoinColumn({ name: 'userId' })
     user:User
 
-    @ManyToOne(()=>RowEntity, (row)=> row.comments)
+    @ManyToOne(()=>RowEntity, (row)=> row.comments,{onDelete:'CASCADE'})
     @JoinColumn({name:"rowId"})
     row:RowEntity
     

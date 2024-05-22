@@ -82,10 +82,14 @@ export class TableService {
             relations:{
                 cols:true,
                 rowDetail:true,
+
                 comments:{
                     user:{
                         userInfors:true
                     }
+                },
+                todoLists:{
+                    todos:true
                 }
             }
 
