@@ -84,6 +84,22 @@ export class TodolistService {
         await this.todoRepository.remove(todoDel)
     }
 
+    async updateIsChecked(todoId:number, isChecked:boolean):Promise<Todo>{
+
+        const todoFind= await this.findTodoById(todoId)
+        if(!todoFind){
+
+            throw new NotFoundException("todo does not find");
+        }
+
+        todoFind.isChecked=isChecked
+      return await this.todoRepository.save(todoFind)
+        
+
+
+
+    }
+
 
     
 

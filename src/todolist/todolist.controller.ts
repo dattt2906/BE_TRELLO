@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
 import { TodolistService } from './todolist.service';
 import { TodoListDto } from './dto/todoList.dto';
 import { TodoList } from './entity/todoList.entity';
@@ -35,6 +35,11 @@ export class TodolistController {
   async delTodoById(@Param("todoId") todoId:number):Promise<void>{
 
     return await this.todolistService.delTodoById(todoId)
+  }
+
+  @Put("update-isChecked-by-todoId/:todoId")
+  async updateIsChecked(@Param("todoId") todoId:number,@Body("isChecked") isChecked:boolean):Promise<Todo>{
+    return await this.todolistService.updateIsChecked(todoId, isChecked)
   }
 
 

@@ -11,6 +11,8 @@ export class Todo {
     @ManyToOne(()=>TodoList, (todolist)=> todolist.todos,{onDelete:'CASCADE'})
     @JoinColumn({name:"todoListId"})
     todolist:TodoList
+    @Column({default:false})
+    isChecked:Boolean
 
 
 }
