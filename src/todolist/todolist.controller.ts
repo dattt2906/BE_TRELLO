@@ -25,6 +25,7 @@ export class TodolistController {
     return await this.todolistService.findTodoListById(todoListId)
 
   }
+  // @Get("find-todolist-by-todoId/:todoId")
   @Delete("del-todolist-by-id/:todoListId")
   async delTodoListById(@Param("todoListId") todoListId:number):Promise<void>{
 
