@@ -61,6 +61,10 @@ workspaceFind.users.push(user)
 return await this.workspaceRepository.save(workspaceFind)
 
     }
+    async delWorkspaceById(workspaceId:number):Promise<void>{
+        const workspaceDel= await this.findWorkspaceById(workspaceId)
+        await this.workspaceRepository.remove(workspaceDel)
+    }
 
 
  

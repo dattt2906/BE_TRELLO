@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
 import { WorkspaceService } from './workspace.service';
 import { WorkspaceDto } from './dto/workspace.dto';
 import { Workspace } from './entity/workspace.entity';
@@ -20,6 +20,10 @@ export class WorkspaceController {
   @Post("add-user-in-workspace")
   async addUserInWorkspace(@Body() addUser:AddUserDto):Promise<any>{
     return await this.workspaceService.addUserInWorkspace(addUser.workspaceId, addUser.userId)
+  }
+  @Delete("del-workspace-by-id/:workspaceId")
+  async delWorkspaceById(@Param("workspaceId") workspaceId:number):Promise<void>{
+    return await this.workspaceService.delWorkspaceById(workspaceId)
   }
 
 }

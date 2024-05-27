@@ -32,7 +32,7 @@ import { Todo } from './todolist/entity/todo.entity';
     host: 'localhost',
     port: 3306,
     username: 'root',
-    password: '01214155429a',
+    password: '123456',
     database: 'nestjs',
     entities: [User, ColumnEntity, RowEntity,UserInfor,Workspace,Board, RowDetail, Comment,TodoList,Todo],
     synchronize: true,
