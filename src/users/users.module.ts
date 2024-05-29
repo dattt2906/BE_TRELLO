@@ -14,6 +14,7 @@ import { Board } from 'src/board/entity/board.entity';
 import { Workspace } from 'src/workspace/entity/workspace.entity';
 import { BoardService } from 'src/board/board.service';
 import { WorkspaceService } from 'src/workspace/workspace.service';
+import { Noti } from 'src/noti/entity/noti.entity';
 
 
 

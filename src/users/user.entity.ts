@@ -3,6 +3,7 @@ import { Entity, PrimaryGeneratedColumn, Column, OneToMany, OneToOne, ManyToMany
 import { UserInfor } from "./userInfor.entity";
 import { Workspace } from "src/workspace/entity/workspace.entity";
 import { Comment } from "src/comment/entity/comment.entity";
+import { Noti } from "src/noti/entity/noti.entity";
 @Entity()
 export class User {
     @PrimaryGeneratedColumn()
@@ -26,5 +27,7 @@ export class User {
 
     @OneToMany(()=>Comment, (comment)=>comment.user)
     comments:Comment[]
+    @OneToMany(()=>Noti, (noti)=>noti.user)
+    noties:Noti[]
 
 }

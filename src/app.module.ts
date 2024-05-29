@@ -22,6 +22,8 @@ import { CommentModule } from './comment/comment.module';
 import { TodolistModule } from './todolist/todolist.module';
 import { TodoList } from './todolist/entity/todoList.entity';
 import { Todo } from './todolist/entity/todo.entity';
+import { NotiModule } from './noti/noti.module';
+import { Noti } from './noti/entity/noti.entity';
 
 
 
@@ -34,9 +36,9 @@ import { Todo } from './todolist/entity/todo.entity';
     username: 'root',
     password: '123456',
     database: 'nestjs',
-    entities: [User, ColumnEntity, RowEntity,UserInfor,Workspace,Board, RowDetail, Comment,TodoList,Todo],
+    entities: [User, ColumnEntity, RowEntity,UserInfor,Workspace,Board, RowDetail, Comment,TodoList,Todo,Noti],
     synchronize: true,
-  }), UsersModule, TableModule, AuthModule, MailerModule, WorkspaceModule, BoardModule,EventModule, CommentModule, TodolistModule],
+  }), UsersModule, TableModule, AuthModule, MailerModule, WorkspaceModule, BoardModule,EventModule, CommentModule, TodolistModule, NotiModule],
   controllers: [AppController],
   providers: [AppService],
 })
