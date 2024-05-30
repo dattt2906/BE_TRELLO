@@ -1,6 +1,6 @@
 import { User } from "src/users/user.entity";
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany, OneToOne, ManyToMany, JoinTable, JoinColumn, ManyToOne } from "typeorm";
-
+@Entity()
 export class Noti {
     @PrimaryGeneratedColumn()
     notiId: number
