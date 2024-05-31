@@ -4,6 +4,7 @@ import { UserInfor } from "./userInfor.entity";
 import { Workspace } from "src/workspace/entity/workspace.entity";
 import { Comment } from "src/comment/entity/comment.entity";
 import { Noti } from "src/noti/entity/noti.entity";
+import { RecentBoard } from "src/recentboard/entity/recentboard.entity";
 @Entity()
 export class User {
     @PrimaryGeneratedColumn()
@@ -29,5 +30,8 @@ export class User {
     comments:Comment[]
     @OneToMany(()=>Noti, (noti)=>noti.user)
     noties:Noti[]
+
+    @OneToMany(()=>RecentBoard, (recentboard)=>recentboard.user)
+    recentBoards:RecentBoard[]
 
 }

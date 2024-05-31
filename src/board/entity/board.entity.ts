@@ -1,3 +1,4 @@
+import { RecentBoard } from "src/recentboard/entity/recentboard.entity";
 import { ColumnEntity } from "src/table/column.entity";
 import { Workspace } from "src/workspace/entity/workspace.entity";
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany, OneToOne, ManyToMany, JoinColumn, ManyToOne } from "typeorm";
@@ -15,4 +16,6 @@ export class Board {
     @ManyToOne(()=>Workspace,(workspace)=>workspace.boards )
     @JoinColumn({name:"workspaceId"})
     workspace:Workspace
+    @OneToOne(()=>RecentBoard, (recentboard)=>recentboard.board)
+    recentBoard:RecentBoard
 }
