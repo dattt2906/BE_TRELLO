@@ -55,6 +55,7 @@ export class UsersService {
             relations:
             {
                 userInfors:true,
+                recentBoards:true,
                 
                 workspaces: {
                     boards: {
