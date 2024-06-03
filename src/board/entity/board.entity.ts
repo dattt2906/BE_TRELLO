@@ -16,6 +16,6 @@ export class Board {
     @ManyToOne(()=>Workspace,(workspace)=>workspace.boards )
     @JoinColumn({name:"workspaceId"})
     workspace:Workspace
-    @OneToOne(()=>RecentBoard, (recentboard)=>recentboard.board)
-    recentBoard:RecentBoard
+    // @OneToOne(()=>RecentBoard, (recentboard)=>recentboard.board)
+    // recentBoard:RecentBoard
 }

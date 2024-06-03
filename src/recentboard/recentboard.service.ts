@@ -32,7 +32,8 @@ export class RecentboardService {
             }
             const newRecentboard= new RecentBoard()
             newRecentboard.user= user
-            newRecentboard.board= board
+            newRecentboard.workspaceId=board.workspace.workspaceId
+            newRecentboard.boardId=board.boardId
             newRecentboard.recentBoardName=board.boardname
             newRecentboard.recentBoardBackGround=board.boardbackground
             newRecentboard.workspaceName= board.workspace.workspacename

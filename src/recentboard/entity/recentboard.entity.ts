@@ -13,11 +13,16 @@ export class RecentBoard {
     recentBoardBackGround:string
     @Column()
     workspaceName:string
+    @Column()
+    workspaceId:number
+    @Column()
+    boardId:number
     @ManyToOne(()=>User, (user)=>user.recentBoards)
     @JoinColumn({name:"userId"})
     user:User
 
-    @OneToOne(()=>Board, (board)=> board.recentBoard)
-    @JoinColumn({name:"boardId"})
-    board:Board
+
+    // @OneToOne(()=>Board, (board)=> board.recentBoard)
+    // @JoinColumn({name:"boardId"})
+    // board:Board
 }
