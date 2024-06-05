@@ -77,6 +77,7 @@ export class AuthService {
         const payload ={sub:user.userId, workspaceId:workspaceId};
         // const invite_token= await this.jwtService.signAsync(payload);
         await this.mailerService.sendEmailInvite(user.userId, email, workspaceId)
+        return user
         
 
 
