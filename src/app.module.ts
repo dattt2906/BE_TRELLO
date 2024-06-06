@@ -26,6 +26,8 @@ import { NotiModule } from './noti/noti.module';
 import { Noti } from './noti/entity/noti.entity';
 import { RecentboardModule } from './recentboard/recentboard.module';
 import { RecentBoard } from './recentboard/entity/recentboard.entity';
+import { APP_GUARD } from '@nestjs/core';
+import { AuthGuard } from './auth/decorate/auth.guard';
 
 
 

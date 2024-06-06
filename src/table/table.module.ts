@@ -20,6 +20,7 @@ import { RowDetail } from './rowDetails.entity';
 @Module({
   imports: [TypeOrmModule.forFeature([ColumnEntity, RowEntity,RowDetail,Board,Workspace,User,UserInfor])],
   controllers: [TableController],
-  providers: [TableService,BoardService,WorkspaceService,UsersService]
+  providers: [TableService,BoardService,WorkspaceService,UsersService
+]
 })
 export class TableModule { }

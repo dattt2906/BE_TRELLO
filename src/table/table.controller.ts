@@ -8,6 +8,8 @@ import { Public } from 'src/auth/decorate/auth.guard';
 import { RowDetail } from './rowDetails.entity';
 import { RowdetailDto } from './dto/rowDetails.dto';
 import { promises } from 'dns';
+import { UseGuards } from '@nestjs/common';
+import { AuthGuard } from 'src/auth/decorate/auth.guard';
 
 @Controller('table')
 export class TableController {
@@ -33,6 +35,8 @@ export class TableController {
     async getUserById(@Param("columnId") columnId: number): Promise<ColumnEntity> {
         return await this.tableService.findColumnById(columnId);
     }
+    // @Public()
+    // @UseGuards(AuthGuard)
     @Get("find-row-by-id/:rowId")
     async findRowById(@Param("rowId") rowId: number): Promise<RowEntity> {
         return await this.tableService.findRowById(rowId);
@@ -41,6 +45,7 @@ export class TableController {
     async findAllRow(): Promise<RowEntity[]> {
         return await this.tableService.findAllRow();
     }
+    // @UseGuards(AuthGuard)
     @Post("create-row")
     async createRow(@Body() row: RowDto): Promise<RowEntity> {
         return await this.tableService.createRow(row);

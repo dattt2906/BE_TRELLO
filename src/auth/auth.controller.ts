@@ -14,6 +14,7 @@ export class AuthController {
     async signIn(@Body() account:AccountDto ) {
         return this.authService.signIn(account.email, account.password);
       }
+      // @Public()
     @Post('regis')
     async regis(@Body(ValidationPipe) account:AccountDto){
       return this.authService.Register(account.email,account.password);
@@ -29,6 +30,7 @@ export class AuthController {
 
       return this.authService.confirm(token)
     }
+    // @Public()
     @Post('forget-pass')
     async forgetPass(@Body('email') email:string):Promise<any>{
       return await this.authService.forgetPass(email)

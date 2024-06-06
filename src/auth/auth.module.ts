@@ -21,6 +21,7 @@ import { Workspace } from 'src/workspace/entity/workspace.entity';
 import { BoardService } from 'src/board/board.service';
 import { WorkspaceService } from 'src/workspace/workspace.service';
 import { RowDetail } from 'src/table/rowDetails.entity';
+import { AuthGuard } from './decorate/auth.guard';
 
 
 @Module({
@@ -31,6 +32,8 @@ import { RowDetail } from 'src/table/rowDetails.entity';
     signOptions: { expiresIn: jwtConstants.expiresIn},
   }),UsersModule,MailerModule,ConfigModule ],
   controllers: [AuthController],
-  providers: [AuthService,UsersService,MailerService]
+  providers: [AuthService,UsersService,MailerService
+    
+  ]
 })
 export class AuthModule {}
