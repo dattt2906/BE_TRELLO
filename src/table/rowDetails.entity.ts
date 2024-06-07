@@ -2,6 +2,7 @@ import { ColumnEntity } from "src/table/column.entity";
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany, OneToOne, JoinColumn } from "typeorm";
 import { RowEntity } from "./row.entity";
 import { RowDto } from "./dto/row.dto";
+import { File } from "src/files/entity/file.entity";
 @Entity()
 export class RowDetail {
     @PrimaryGeneratedColumn()
@@ -22,5 +23,8 @@ export class RowDetail {
     @OneToOne(() => RowEntity, (row) => row.rowDetail, {onDelete:'CASCADE'})
     @JoinColumn({name:"rowId"}) 
     row:RowEntity
+
+    @OneToMany(()=> File, (file)=> file.rowDetail)
+    files:File[]
 
 }

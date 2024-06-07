@@ -167,7 +167,8 @@ export class TableService {
                 relations:{
                     row:{
                         cols:true
-                    }
+                    },
+                    files:true
                 }  
             })
     }

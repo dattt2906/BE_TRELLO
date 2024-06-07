@@ -28,7 +28,9 @@ import { RecentboardModule } from './recentboard/recentboard.module';
 import { RecentBoard } from './recentboard/entity/recentboard.entity';
 import { APP_GUARD } from '@nestjs/core';
 import { AuthGuard } from './auth/decorate/auth.guard';
-
+import { FilesModule } from './files/files.module';
+import { File } from './files/entity/file.entity';
+import { ImageController } from './image/image.controller';
 
 
 
@@ -40,10 +42,10 @@ import { AuthGuard } from './auth/decorate/auth.guard';
     username: 'root',
     password: '123456',
     database: 'nestjs',
-    entities: [User, ColumnEntity, RowEntity,UserInfor,Workspace,Board, RowDetail, Comment,TodoList,Todo,Noti,RecentBoard],
+    entities: [User, ColumnEntity, RowEntity,UserInfor,Workspace,Board, RowDetail, Comment,TodoList,Todo,Noti,RecentBoard, File],
     synchronize: true,
-  }), UsersModule, TableModule, AuthModule, MailerModule, WorkspaceModule, BoardModule,EventModule, CommentModule, TodolistModule, NotiModule, RecentboardModule],
-  controllers: [AppController],
+  }), UsersModule, TableModule, AuthModule, MailerModule, WorkspaceModule, BoardModule,EventModule, CommentModule, TodolistModule, NotiModule, RecentboardModule, FilesModule],
+  controllers: [AppController, ImageController],
   providers: [AppService],
 })
 export class AppModule { }
