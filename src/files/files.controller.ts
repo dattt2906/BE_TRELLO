@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post, UploadedFile, UseInterceptors } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, UploadedFile, UseInterceptors } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
 import { extname } from 'path';
@@ -37,6 +37,10 @@ export class FilesController {
     @Get("find-file-by-id/:fileId")
     async findFileById(@Param("fileId") fileId:number):Promise<File>{
         return await this.filesService.findFileById(fileId)
+    }
+    @Delete("del-file-by-id/:fileId")
+    async delFileById(@Param("fileId") fileId:number):Promise<File>{
+        return await this.filesService.delFileById(fileId)
     }
 
 

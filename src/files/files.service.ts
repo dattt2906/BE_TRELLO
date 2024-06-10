@@ -42,6 +42,18 @@ export class FilesService {
         }
     })
   }
+  async delFileById(fileId:number):Promise<any>{
+
+    const fileFind= await this.findFileById(fileId)
+    if(!fileFind){
+      throw new NotFoundException("file does not find")
+
+    }
+    return await this.filesRepository.remove(fileFind)
+
+  }
+
+
 
   
 }

@@ -9,12 +9,12 @@ const PASSWORD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d
 @Controller('auth')
 export class AuthController {
     constructor(private authService: AuthService) {}
-    // @Public()
+    @Public()
     @Post('login')
     async signIn(@Body() account:AccountDto ) {
         return this.authService.signIn(account.email, account.password);
       }
-      // @Public()
+      @Public()
     @Post('regis')
     async regis(@Body(ValidationPipe) account:AccountDto){
       return this.authService.Register(account.email,account.password);

@@ -46,6 +46,11 @@ import { ImageController } from './image/image.controller';
     synchronize: true,
   }), UsersModule, TableModule, AuthModule, MailerModule, WorkspaceModule, BoardModule,EventModule, CommentModule, TodolistModule, NotiModule, RecentboardModule, FilesModule],
   controllers: [AppController, ImageController],
-  providers: [AppService],
+  providers: [AppService,
+    {
+      provide:APP_GUARD,
+      useClass:AuthGuard
+    }
+  ],
 })
 export class AppModule { }

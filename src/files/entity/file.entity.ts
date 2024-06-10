@@ -14,7 +14,7 @@ export class File {
 
   @CreateDateColumn()
     createdAt!: Date;
-    @ManyToOne(()=> RowDetail, (rowdetail)=> rowdetail.files)
+    @ManyToOne(()=> RowDetail, (rowdetail)=> rowdetail.files,{onDelete:'CASCADE'})
     @JoinColumn({name:"rowId"})
     rowDetail:RowDetail
 }
