@@ -42,7 +42,7 @@ export class AuthGuard implements CanActivate {
       throw new UnauthorizedException("User does not login");
     }
     try {
-      console.log("1111")
+      
       const payload = await this.jwtService.verifyAsync(
         token,
         {

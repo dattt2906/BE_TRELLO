@@ -33,6 +33,22 @@ export class CommentService {
        
         return await this.commentRepository.save(newComment)
     }
+    async findCommentById(commentId:number):Promise<Comment>{
+
+        return await this.commentRepository.findOne({
+    
+            where:{commentId:commentId},
+            
+        })
+      }
+    async DelComment(commentId:number):Promise<any>{
+        const commentFind= await this.findCommentById(commentId)
+        if(!commentFind){
+            throw new NotFoundException("rowdetail does not find")
+
+        }
+        return await this.commentRepository.remove(commentFind)
+    }
 
 
 }

@@ -20,21 +20,24 @@ export class AuthController {
       return this.authService.Register(account.email,account.password);
       
     }
+    @Public()
     @Post('decodeToken')
     async decodeToken(@Body('token') token:string):Promise<any>{
       return this.authService.decodeToken(token)
     }
+    @Public()
     @Get('confirm/:token')
     @Redirect("http://localhost:3000")
     async confirm(@Param("token") token:string):Promise<any>{
 
       return this.authService.confirm(token)
     }
-    // @Public()
+    @Public()
     @Post('forget-pass')
     async forgetPass(@Body('email') email:string):Promise<any>{
       return await this.authService.forgetPass(email)
     }
+    
     @Put("update-user-password/:userId")
     async updateUser(@Param("userId") userId:number, @Body('password') password:string):Promise<any> {
   

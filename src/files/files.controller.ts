@@ -6,10 +6,12 @@ import { FilesService } from './files.service';
 import { File } from './entity/file.entity';
 import { Path } from '@nestjs/config';
 import { FileDto } from './dto/file.dto';
+import { Public } from 'src/auth/decorate/auth.guard';
 
 @Controller('files')
 export class FilesController {
     constructor(private readonly filesService: FilesService) {}
+  
     @Post('upload')
     @UseInterceptors(FileInterceptor('file', {
       storage: diskStorage({
@@ -23,12 +25,17 @@ export class FilesController {
       }),
     }))
     uploadFile(@UploadedFile() file: Express.Multer.File) {
+      if(!file){
+        console.log("upload file fail")
+      }
+      else{
       console.log(file);
       return {
         message: 'File uploaded successfully',
         filename: file.filename,
         originalname:file.originalname
       };
+    }
     }
     @Post("create")
     async create(@Body() file:FileDto):Promise<File>{

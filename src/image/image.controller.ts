@@ -2,9 +2,11 @@ import { Controller, Get, Param, Res } from '@nestjs/common';
 import { Response } from 'express';
 import * as path from 'path';
 import * as fs from 'fs';
+import { Public } from 'src/auth/decorate/auth.guard';
 
 @Controller('api/images')
 export class ImageController {
+  @Public()
   @Get(':filename')
   getImage(@Param('filename') filename: string, @Res() res: Response) {
     const imagePath = path.join(__dirname, '..', '..', '.public', 'image', filename);
