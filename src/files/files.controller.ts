@@ -7,6 +7,8 @@ import { File } from './entity/file.entity';
 import { Path } from '@nestjs/config';
 import { FileDto } from './dto/file.dto';
 import { Public } from 'src/auth/decorate/auth.guard';
+import * as fs from 'fs';
+import * as path from 'path';
 
 @Controller('files')
 export class FilesController {
@@ -45,6 +47,23 @@ export class FilesController {
     async findFileById(@Param("fileId") fileId:number):Promise<File>{
         return await this.filesService.findFileById(fileId)
     }
+
+
+
+    @Delete('/delete/:filename')
+  deleteFile(@Param('filename') filename: string): { message: string } {
+    const filePath = path.join(__dirname, '..', '..', '.public', 'image', filename);
+
+    // Kiểm tra xem tệp có tồn tại không
+    if (fs.existsSync(filePath)) {
+      // Nếu tệp tồn tại, xóa nó
+      fs.unlinkSync(filePath);
+      return { message: 'File deleted successfully' };
+    } else {
+      // Nếu tệp không tồn tại, trả về một thông báo lỗi
+      return { message: 'File not found' };
+    }
+  }
     @Delete("del-file-by-id/:fileId")
     async delFileById(@Param("fileId") fileId:number):Promise<File>{
         return await this.filesService.delFileById(fileId)
